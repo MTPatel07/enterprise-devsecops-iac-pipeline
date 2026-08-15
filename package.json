@@ -1,0 +1,51 @@
+{
+  "name": "secureshop-devsecops",
+  "version": "1.0.0",
+  "description": "Enterprise DevSecOps E-commerce Platform with comprehensive security scanning",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/db/seed.ts",
+    "security:audit": "npm audit",
+    "security:audit-fix": "npm audit fix",
+    "docker:build": "docker build -t secureshop:latest .",
+    "docker:run": "docker run -p 3000:3000 secureshop:latest",
+    "docker:compose": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "validate": "npm run lint && npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "dotenv": "17.3.1",
+    "drizzle-orm": "0.45.2",
+    "next": "16.2.6",
+    "pg": "8.20.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.1.17",
+    "@types/node": "22.19.15",
+    "@types/pg": "8.18.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "postcss": "8.5.8",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3"
+  },
+  "allowScripts": {
+    "esbuild@0.18.20": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.1": true,
+    "unrs-resolver@1.12.2": true,
+    "sharp@0.34.5": true
+  }
+}

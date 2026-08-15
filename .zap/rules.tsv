@@ -1,0 +1,21 @@
+# ZAP Scanning Rules Configuration
+# Format: rule_id  action  comment
+# Actions: IGNORE, INFO, WARN, FAIL
+
+# Ignore false positives for development
+10096	IGNORE	Timestamp Disclosure
+10109	IGNORE	Modern Web Application
+10049	INFO	Storable and Cacheable Content
+10015	INFO	Incomplete or No Cache-control Header Set
+10038	INFO	Content Security Policy (CSP) Header Not Set
+
+# Security Headers (WARN in dev, FAIL in production)
+10020	WARN	X-Frame-Options Header Not Set
+10021	WARN	X-Content-Type-Options Header Missing
+10023	WARN	Information Disclosure - Debug Error Messages
+
+# Critical vulnerabilities (FAIL)
+40012	FAIL	Cross Site Scripting (Reflected)
+40014	FAIL	Cross Site Scripting (Persistent)
+40018	FAIL	SQL Injection
+90019	FAIL	Server Side Code Injection

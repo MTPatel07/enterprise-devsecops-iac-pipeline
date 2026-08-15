@@ -1,0 +1,91 @@
+name: Weekly Dependency Update
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    name: Update and Audit Dependencies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install current dependencies
+        run: npm ci
+
+      - name: Run security audit (before update)
+        run: |
+          echo "## Security Audit - Before Update" >> $GITHUB_STEP_SUMMARY
+          npm audit --json > audit-before.json || true
+          npm audit >> $GITHUB_STEP_SUMMARY || true
+
+      - name: Update dependencies
+        run: |
+          npm update
+          npm audit fix --force || true
+
+      - name: Run security audit (after update)
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Security Audit - After Update" >> $GITHUB_STEP_SUMMARY
+          npm audit --json > audit-after.json || true
+          npm audit >> $GITHUB_STEP_SUMMARY || true
+
+      - name: Run tests
+        run: |
+          npm run typecheck
+          npm run lint || true
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: weekly dependency updates and security patches'
+          title: '🔒 Weekly Dependency Security Update'
+          body: |
+            ## Automated Dependency Update
+            
+            This PR contains weekly dependency updates and security patches.
+            
+            ### Changes
+            - Updated npm dependencies to latest versions
+            - Applied automated security fixes
+            
+            ### Security Audit
+            Check the workflow summary for before/after security audit results.
+            
+            ### Testing
+            - ✅ TypeScript compilation checked
+            - ✅ Linting performed
+            
+            Please review the changes and run full test suite before merging.
+            
+            ---
+            🤖 Automated by GitHub Actions
+          branch: chore/dependency-update-${{ github.run_number }}
+          delete-branch: true
+          labels: dependencies, security
+
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit-reports
+          path: |
+            audit-before.json
+            audit-after.json

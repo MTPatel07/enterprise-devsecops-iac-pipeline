@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: secureshop-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - secureshop-network
+
+  # Next.js Application (for production testing)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: secureshop-app
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app_db
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - secureshop-network
+    restart: unless-stopped
+
+  # OWASP ZAP for DAST scanning (optional)
+  zap:
+    image: owasp/zap2docker-stable
+    container_name: secureshop-zap
+    command: zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true
+    ports:
+      - "8080:8080"
+    networks:
+      - secureshop-network
+    profiles:
+      - security-testing
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  secureshop-network:
+    driver: bridge
