@@ -1,39 +1,31 @@
-# Dependencies
-node_modules
+# ─────────────────────────────────────────────────────────────
+# SecureShop — .gitignore
+# ─────────────────────────────────────────────────────────────
+
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
 /.pnp
 .pnp.js
+.yarn/install-state.gz
 
-# Testing
-/coverage
-
-# Next.js
-/.next/
+# ── Next.js ───────────────────────────────────────────────────
+.next/
 /out/
 next-env.d.ts
 
-# Production
+# ── Production build ──────────────────────────────────────────
 /build
-dist
+dist/
 
-# Misc
-.DS_Store
-*.pem
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Local env files
+# ── Environment files (NEVER commit these) ────────────────────
 .env
-.env*.local
-.env.development
-.env.production
+.env.*
+!.env.example
 
-# Vercel
+# ── Vercel ────────────────────────────────────────────────────
 .vercel
 
-# Terraform
+# ── Terraform ─────────────────────────────────────────────────
 terraform/.terraform/
 terraform/.terraform.lock.hcl
 terraform/terraform.tfstate
@@ -41,15 +33,15 @@ terraform/terraform.tfstate.backup
 terraform/terraform.tfvars
 terraform/*.tfvars
 !terraform/terraform.tfvars.example
+.terraform/
+*.tfplan
+*.tfstate
+*.tfstate.backup
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# ── Docker ────────────────────────────────────────────────────
+.docker/
 
-# Security scan reports
+# ── Security scan reports (generated artifacts) ───────────────
 *.sarif
 report_*.html
 report_*.json
@@ -57,11 +49,51 @@ npm-audit-report.json
 tfsec-report.json
 checkov-results.*
 trivy-results.*
+zap-report.*
+dependency-check-report/
+reports/
 
-# Logs
-logs
+# ── Logs ──────────────────────────────────────────────────────
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 /tmp/
 
-# OS
+# ── OS files ──────────────────────────────────────────────────
+.DS_Store
 Thumbs.db
+Desktop.ini
+
+# ── IDE / Editor ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# ── Certificates and keys ─────────────────────────────────────
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+*.ppk
+
+# ── Drizzle ORM generated migrations ──────────────────────────
+drizzle/
+
+# ── Testing ───────────────────────────────────────────────────
+/coverage
+.nyc_output/
+
+# ── Misc ──────────────────────────────────────────────────────
+*.tgz
+.cache/
