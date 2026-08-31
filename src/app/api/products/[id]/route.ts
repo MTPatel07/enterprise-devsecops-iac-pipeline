@@ -3,6 +3,10 @@ import { db } from '@/db';
 import { products } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
+// Force dynamic rendering — prevents Next.js from pre-rendering
+// this route at build time (which would require a DB connection).
+export const dynamic = 'force-dynamic';
+
 type RouteContext = {
   params: Promise<{ id: string }>;
 };
