@@ -234,9 +234,9 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: app_db
+          POSTGRES_USER: ${{ secrets.CI_DB_USER || 'postgres' }}
+          POSTGRES_PASSWORD: ${{ secrets.CI_DB_PASSWORD || 'ci_test_only' }}
+          POSTGRES_DB: ${{ secrets.CI_DB_NAME || 'app_db' }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -264,7 +264,7 @@ jobs:
       - name: Build application
         run: npm run build
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/app_db
+          DATABASE_URL: postgresql://${{ secrets.CI_DB_USER || 'postgres' }}:${{ secrets.CI_DB_PASSWORD || 'ci_test_only' }}@localhost:5432/${{ secrets.CI_DB_NAME || 'app_db' }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -282,9 +282,9 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: app_db
+          POSTGRES_USER: ${{ secrets.CI_DB_USER || 'postgres' }}
+          POSTGRES_PASSWORD: ${{ secrets.CI_DB_PASSWORD || 'ci_test_only' }}
+          POSTGRES_DB: ${{ secrets.CI_DB_NAME || 'app_db' }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -313,7 +313,7 @@ jobs:
           sleep 10
           curl -f http://localhost:3000/api/health || exit 1
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/app_db
+          DATABASE_URL: postgresql://${{ secrets.CI_DB_USER || 'postgres' }}:${{ secrets.CI_DB_PASSWORD || 'ci_test_only' }}@localhost:5432/${{ secrets.CI_DB_NAME || 'app_db' }}
           PORT: 3000
 
       - name: OWASP ZAP Baseline Scan
