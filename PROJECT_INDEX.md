@@ -1,6 +1,6 @@
 # Project File Index
 
-Complete index of all files in the SecureShop DevSecOps E-commerce Platform.
+Complete index of all files in the SecureFlow DevSecOps E-commerce Platform.
 
 ## 📚 Documentation (10 files)
 

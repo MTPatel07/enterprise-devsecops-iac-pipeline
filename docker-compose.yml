@@ -4,7 +4,7 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: secureshop-postgres
+    container_name: secureflow-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
@@ -19,14 +19,14 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - secureshop-network
+      - secureflow-network
 
   # Next.js Application (for production testing)
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: secureshop-app
+    container_name: secureflow-app
     environment:
       DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
       NODE_ENV: production
@@ -36,18 +36,18 @@ services:
       postgres:
         condition: service_healthy
     networks:
-      - secureshop-network
+      - secureflow-network
     restart: unless-stopped
 
   # OWASP ZAP for DAST scanning (optional)
   zap:
     image: owasp/zap2docker-stable
-    container_name: secureshop-zap
+    container_name: secureflow-zap
     command: zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true
     ports:
       - "8080:8080"
     networks:
-      - secureshop-network
+      - secureflow-network
     profiles:
       - security-testing
 
@@ -56,5 +56,5 @@ volumes:
     driver: local
 
 networks:
-  secureshop-network:
+  secureflow-network:
     driver: bridge

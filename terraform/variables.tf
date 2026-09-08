@@ -18,7 +18,7 @@ variable "environment" {
 variable "app_name" {
   description = "Application name"
   type        = string
-  default     = "secureshop"
+  default     = "secureflow"
 }
 
 variable "db_username" {

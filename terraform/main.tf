@@ -1,4 +1,4 @@
-# Terraform configuration for SecureShop E-commerce Platform
+# Terraform configuration for SecureFlow E-commerce Platform
 # This IaC will be scanned by Checkov/TFSec in the CI/CD pipeline
 
 terraform {
@@ -22,7 +22,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
 
   tags = {
-    Name        = "secureshop-vpc"
+    Name        = "secureflow-vpc"
     Environment = var.environment
     ManagedBy   = "Terraform"
   }
@@ -37,7 +37,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = false # Security: Don't auto-assign public IPs
 
   tags = {
-    Name        = "secureshop-public-subnet-${count.index + 1}"
+    Name        = "secureflow-public-subnet-${count.index + 1}"
     Environment = var.environment
   }
 }
@@ -50,7 +50,7 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
-    Name        = "secureshop-private-subnet-${count.index + 1}"
+    Name        = "secureflow-private-subnet-${count.index + 1}"
     Environment = var.environment
   }
 }
@@ -60,14 +60,14 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name        = "secureshop-igw"
+    Name        = "secureflow-igw"
     Environment = var.environment
   }
 }
 
 # Security Group for Application Load Balancer
 resource "aws_security_group" "alb" {
-  name        = "secureshop-alb-sg"
+  name        = "secureflow-alb-sg"
   description = "Security group for Application Load Balancer"
   vpc_id      = aws_vpc.main.id
 
@@ -96,14 +96,14 @@ resource "aws_security_group" "alb" {
   }
 
   tags = {
-    Name        = "secureshop-alb-sg"
+    Name        = "secureflow-alb-sg"
     Environment = var.environment
   }
 }
 
 # Security Group for ECS Tasks
 resource "aws_security_group" "ecs_tasks" {
-  name        = "secureshop-ecs-tasks-sg"
+  name        = "secureflow-ecs-tasks-sg"
   description = "Security group for ECS tasks"
   vpc_id      = aws_vpc.main.id
 
@@ -124,14 +124,14 @@ resource "aws_security_group" "ecs_tasks" {
   }
 
   tags = {
-    Name        = "secureshop-ecs-tasks-sg"
+    Name        = "secureflow-ecs-tasks-sg"
     Environment = var.environment
   }
 }
 
 # Security Group for RDS Database
 resource "aws_security_group" "rds" {
-  name        = "secureshop-rds-sg"
+  name        = "secureflow-rds-sg"
   description = "Security group for RDS PostgreSQL database"
   vpc_id      = aws_vpc.main.id
 
@@ -152,17 +152,17 @@ resource "aws_security_group" "rds" {
   }
 
   tags = {
-    Name        = "secureshop-rds-sg"
+    Name        = "secureflow-rds-sg"
     Environment = var.environment
   }
 }
 
 # S3 Bucket for application assets (with security best practices)
 resource "aws_s3_bucket" "assets" {
-  bucket = "secureshop-assets-${var.environment}"
+  bucket = "secureflow-assets-${var.environment}"
 
   tags = {
-    Name        = "secureshop-assets"
+    Name        = "secureflow-assets"
     Environment = var.environment
   }
 }
@@ -207,10 +207,10 @@ resource "aws_s3_bucket_logging" "assets" {
 
 # S3 Bucket for logs
 resource "aws_s3_bucket" "logs" {
-  bucket = "secureshop-logs-${var.environment}"
+  bucket = "secureflow-logs-${var.environment}"
 
   tags = {
-    Name        = "secureshop-logs"
+    Name        = "secureflow-logs"
     Environment = var.environment
   }
 }
@@ -238,29 +238,29 @@ resource "aws_s3_bucket_public_access_block" "logs" {
 
 # CloudWatch Log Group for application logs
 resource "aws_cloudwatch_log_group" "app" {
-  name              = "/ecs/secureshop-${var.environment}"
+  name              = "/ecs/secureflow-${var.environment}"
   retention_in_days = 30
 
   tags = {
-    Name        = "secureshop-logs"
+    Name        = "secureflow-logs"
     Environment = var.environment
   }
 }
 
 # KMS Key for encryption
 resource "aws_kms_key" "main" {
-  description             = "KMS key for SecureShop encryption"
+  description             = "KMS key for SecureFlow encryption"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
   tags = {
-    Name        = "secureshop-kms"
+    Name        = "secureflow-kms"
     Environment = var.environment
   }
 }
 
 resource "aws_kms_alias" "main" {
-  name          = "alias/secureshop-${var.environment}"
+  name          = "alias/secureflow-${var.environment}"
   target_key_id = aws_kms_key.main.key_id
 }
 

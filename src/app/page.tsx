@@ -126,7 +126,7 @@ export default function Home() {
       <header className="bg-white shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold text-indigo-600">🛒 SecureShop</h1>
+            <h1 className="text-3xl font-bold text-indigo-600">🛒 SecureFlow</h1>
             <button
               onClick={() => setShowCart(!showCart)}
               className="relative bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition"
@@ -287,7 +287,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-600">
             <p className="font-semibold text-indigo-600 mb-2">
-              🔒 SecureShop - Enterprise DevSecOps E-commerce Platform
+              🔒 SecureFlow - Enterprise DevSecOps E-commerce Platform
             </p>
             <p className="text-sm">
               Built with Next.js, PostgreSQL, and comprehensive security scanning

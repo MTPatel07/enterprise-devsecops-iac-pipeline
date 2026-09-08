@@ -43,7 +43,7 @@ npm run lint
 **Configuration:**
 ```properties
 # sonar-project.properties
-sonar.projectKey=secureshop-ecommerce
+sonar.projectKey=secureflow-ecommerce
 sonar.sources=src
 sonar.security.hotspots.enabled=true
 ```
@@ -64,7 +64,7 @@ sonar.security.hotspots.enabled=true
    - `SONAR_HOST_URL`: https://sonarcloud.io
 
 **Viewing Results:**
-- Dashboard: https://sonarcloud.io/dashboard?id=secureshop-ecommerce
+- Dashboard: https://sonarcloud.io/dashboard?id=secureflow-ecommerce
 - Security hotspots show potential vulnerabilities
 - Reliability, Security, Maintainability ratings
 

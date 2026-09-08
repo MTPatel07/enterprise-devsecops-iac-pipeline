@@ -15,7 +15,7 @@ async function seed() {
       },
       {
         name: 'Admin User',
-        email: 'admin@secureshop.com',
+        email: 'admin@secureflow.com',
         passwordHash: '$2a$10$dummyhashfordemopurposes123456',
         role: 'admin',
       },

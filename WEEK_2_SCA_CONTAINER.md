@@ -62,7 +62,7 @@ found 3 vulnerabilities (1 moderate, 2 high)
 - name: OWASP Dependency Check
   uses: dependency-check/Dependency-Check_Action@main
   with:
-    project: 'SecureShop'
+    project: 'SecureFlow'
     path: '.'
     format: 'HTML'
 ```
@@ -254,16 +254,16 @@ HEALTHCHECK --interval=30s --timeout=3s \
 ```bash
 # Scan image
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-  aquasec/trivy image secureshop:latest
+  aquasec/trivy image secureflow:latest
 
 # Output formats
-trivy image --format sarif -o results.sarif secureshop:latest
-trivy image --format json secureshop:latest
+trivy image --format sarif -o results.sarif secureflow:latest
+trivy image --format json secureflow:latest
 ```
 
 **Example Output:**
 ```
-secureshop:latest (alpine 3.19)
+secureflow:latest (alpine 3.19)
 ==================================
 Total: 5 (CRITICAL: 1, HIGH: 2, MEDIUM: 2)
 
@@ -294,10 +294,10 @@ Total: 5 (CRITICAL: 1, HIGH: 2, MEDIUM: 2)
 **Usage:**
 ```bash
 # Quick scan
-docker scout cves secureshop:latest
+docker scout cves secureflow:latest
 
 # Recommendations
-docker scout recommendations secureshop:latest
+docker scout recommendations secureflow:latest
 ```
 
 ### Container Security Checklist
@@ -339,10 +339,10 @@ container-scan:
    sed -i 's/node:20-alpine/node:20-alpine3.19/' Dockerfile
    
    # Rebuild
-   docker build -t secureshop:latest .
+   docker build -t secureflow:latest .
    
    # Re-scan
-   trivy image secureshop:latest
+   trivy image secureflow:latest
    ```
 
 3. **Verify**

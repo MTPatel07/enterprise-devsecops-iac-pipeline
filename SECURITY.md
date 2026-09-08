@@ -5,7 +5,7 @@
 **Please do not report security vulnerabilities through public GitHub issues.**
 
 If you discover a security vulnerability, please send an email to:
-**security@secureshop.example.com**
+**security@secureflow.example.com**
 
 Include the following information:
 - Type of vulnerability
@@ -107,4 +107,4 @@ This project follows security standards including:
 
 ## Contact
 
-Security Team: security@secureshop.example.com
+Security Team: security@secureflow.example.com

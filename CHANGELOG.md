@@ -151,9 +151,9 @@ Complete implementation of multi-layer security scanning pipeline with:
 
 3. **Build Container**
    ```bash
-   docker build -t secureshop:1.0.0 .
-   docker tag secureshop:1.0.0 registry.example.com/secureshop:1.0.0
-   docker push registry.example.com/secureshop:1.0.0
+   docker build -t secureflow:1.0.0 .
+   docker tag secureflow:1.0.0 registry.example.com/secureflow:1.0.0
+   docker push registry.example.com/secureflow:1.0.0
    ```
 
 4. **Deploy Infrastructure**
@@ -167,7 +167,7 @@ Complete implementation of multi-layer security scanning pipeline with:
 5. **Run Final Security Scans**
    ```bash
    # Container scan
-   trivy image secureshop:1.0.0
+   trivy image secureflow:1.0.0
    
    # IaC scan
    checkov -d terraform/

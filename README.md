@@ -1,4 +1,4 @@
-# 🔒 SecureShop - Enterprise DevSecOps E-commerce Platform
+# 🔒 SecureFlow - Enterprise DevSecOps E-commerce Platform
 
 ![DevSecOps Pipeline](https://img.shields.io/badge/DevSecOps-Enabled-green)
 ![Security Scanning](https://img.shields.io/badge/Security-Multi--Layer-blue)
@@ -6,7 +6,7 @@
 
 ## 📋 Executive Summary
 
-SecureShop is a comprehensive e-commerce platform built with **security-first principles** and automated DevSecOps practices. This project demonstrates enterprise-grade security integration across the entire software development lifecycle (SDLC), from code commit to cloud deployment.
+SecureFlow is a comprehensive e-commerce platform built with **security-first principles** and automated DevSecOps practices. This project demonstrates enterprise-grade security integration across the entire software development lifecycle (SDLC), from code commit to cloud deployment.
 
 The platform implements a **multi-layered security approach** integrating:
 - ✅ **SAST** - Static Application Security Testing
@@ -22,7 +22,7 @@ In the highly competitive e-commerce sector, security breaches can result in:
 - Financial penalties and compliance violations
 - Exposure of sensitive customer data (PII, payment information)
 
-**SecureShop addresses these risks by:**
+**SecureFlow addresses these risks by:**
 1. **Shifting security left** - catching vulnerabilities before production
 2. **Automating security gates** - blocking insecure code from deployment
 3. **Continuous monitoring** - ongoing vulnerability assessment
@@ -58,7 +58,7 @@ In the highly competitive e-commerce sector, security breaches can result in:
 ## 📂 Project Structure
 
 ```
-secureshop/
+secureflow/
 ├── .github/
 │   └── workflows/
 │       └── devsecops-pipeline.yml    # Main CI/CD pipeline
@@ -101,8 +101,8 @@ secureshop/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/secureshop.git
-cd secureshop
+git clone https://github.com/yourusername/secureflow.git
+cd secureflow
 ```
 
 2. **Install dependencies**
@@ -390,11 +390,11 @@ npm audit fix  # Auto-fix vulnerabilities
 **3. Container scan with Trivy**
 ```bash
 # Build image
-docker build -t secureshop:test .
+docker build -t secureflow:test .
 
 # Scan image
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-  aquasec/trivy image secureshop:test
+  aquasec/trivy image secureflow:test
 ```
 
 **4. IaC scan with Checkov**
@@ -574,7 +574,7 @@ Follow semantic commit messages:
 
 ## 📞 Support
 
-For security vulnerabilities, please email: security@secureshop.example.com
+For security vulnerabilities, please email: security@secureflow.example.com
 
 **Do not create public GitHub issues for security vulnerabilities.**
 
@@ -592,6 +592,6 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 ---
 
-**Built with ❤️ and 🔒 by the SecureShop Team**
+**Built with ❤️ and 🔒 by the SecureFlow Team**
 
 *Last Updated: 2026*

@@ -1,5 +1,5 @@
 {
-  "name": "secureshop-devsecops",
+  "name": "secureflow-devsecops",
   "version": "1.0.0",
   "description": "Enterprise DevSecOps E-commerce Platform with comprehensive security scanning",
   "private": true,
@@ -14,8 +14,8 @@
     "db:seed": "tsx src/db/seed.ts",
     "security:audit": "npm audit",
     "security:audit-fix": "npm audit fix",
-    "docker:build": "docker build -t secureshop:latest .",
-    "docker:run": "docker run -p 3000:3000 secureshop:latest",
+    "docker:build": "docker build -t secureflow:latest .",
+    "docker:run": "docker run -p 3000:3000 secureflow:latest",
     "docker:compose": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "validate": "npm run lint && npm run typecheck && npm run build"

@@ -9,7 +9,7 @@ on:
 
 env:
   NODE_VERSION: '20'
-  DOCKER_IMAGE: secureshop
+  DOCKER_IMAGE: secureflow
   DOCKER_TAG: ${{ github.sha }}
 
 jobs:
@@ -89,7 +89,7 @@ jobs:
       - name: OWASP Dependency Check
         uses: dependency-check/Dependency-Check_Action@main
         with:
-          project: 'SecureShop'
+          project: 'SecureFlow'
           path: '.'
           format: 'HTML'
           args: >

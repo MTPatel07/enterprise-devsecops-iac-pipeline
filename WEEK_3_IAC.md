@@ -129,10 +129,10 @@ Result #1 HIGH S3 Bucket does not have logging enabled
   terraform/main.tf:145-150
 ──────────────────────────────────────────────────────
   145 │ resource "aws_s3_bucket" "assets" {
-  146 │   bucket = "secureshop-assets-${var.environment}"
+  146 │   bucket = "secureflow-assets-${var.environment}"
   147 │   
   148 │   tags = {
-  149 │     Name = "secureshop-assets"
+  149 │     Name = "secureflow-assets"
   150 │   }
       │ 
   Impact: No audit trail for bucket access

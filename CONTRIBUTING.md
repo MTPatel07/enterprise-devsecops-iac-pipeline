@@ -1,6 +1,6 @@
-# Contributing to SecureShop
+# Contributing to SecureFlow
 
-Thank you for your interest in contributing to SecureShop! This document provides guidelines and best practices for contributing to this DevSecOps e-commerce platform.
+Thank you for your interest in contributing to SecureFlow! This document provides guidelines and best practices for contributing to this DevSecOps e-commerce platform.
 
 ## Code of Conduct
 
@@ -13,8 +13,8 @@ Thank you for your interest in contributing to SecureShop! This document provide
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/yourusername/secureshop.git
-   cd secureshop
+   git clone https://github.com/yourusername/secureflow.git
+   cd secureflow
    ```
 
 2. **Install dependencies**
@@ -379,10 +379,10 @@ When adding features, update README.md:
 # Always include comments
 resource "aws_s3_bucket" "assets" {
   # Store user-uploaded images and static assets
-  bucket = "secureshop-assets-${var.environment}"
+  bucket = "secureflow-assets-${var.environment}"
   
   tags = {
-    Name        = "secureshop-assets"
+    Name        = "secureflow-assets"
     Environment = var.environment
     ManagedBy   = "Terraform"
   }
@@ -427,7 +427,7 @@ We follow [Semantic Versioning](https://semver.org/):
 
 - **General questions**: Open a GitHub Discussion
 - **Bug reports**: Open a GitHub Issue
-- **Security vulnerabilities**: Email security@secureshop.example.com
+- **Security vulnerabilities**: Email security@secureflow.example.com
 - **Feature requests**: Open a GitHub Issue with "enhancement" label
 
 ## Recognition
@@ -437,4 +437,4 @@ Contributors will be recognized in:
 - Release notes
 - GitHub contributors page
 
-Thank you for contributing to SecureShop! 🔒🛒
+Thank you for contributing to SecureFlow! 🔒🛒

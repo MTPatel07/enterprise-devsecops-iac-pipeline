@@ -4,7 +4,7 @@
 
 aws_region = "us-east-1"
 environment = "dev"
-app_name = "secureshop"
+app_name = "secureflow"
 db_username = "your_db_username"
 db_password = "your_secure_password"
 enable_deletion_protection = false

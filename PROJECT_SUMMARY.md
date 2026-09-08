@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-**Project Name:** SecureShop - Enterprise E-commerce Platform  
+**Project Name:** SecureFlow - Enterprise E-commerce Platform  
 **Duration:** 4 Weeks  
 **Technology Stack:** Next.js 16, PostgreSQL, Docker, Terraform, AWS  
 **Security Tools:** 8 integrated scanners across SAST, SCA, Container, IaC, and DAST  
@@ -315,7 +315,7 @@ Permissions-Policy: geolocation=(), microphone=(), camera=()
 ## Project Structure
 
 ```
-secureshop/
+secureflow/
 ├── .github/workflows/
 │   ├── devsecops-pipeline.yml    # Main security pipeline
 │   └── dependency-update.yml     # Automated dependency updates
@@ -419,9 +419,9 @@ The comprehensive 4-week implementation covers all aspects of modern application
 
 ## Contact & References
 
-**Project Repository:** https://github.com/yourorg/secureshop  
+**Project Repository:** https://github.com/yourorg/secureflow  
 **Documentation:** Complete guides for each week  
-**Security Contact:** security@secureshop.example.com  
+**Security Contact:** security@secureflow.example.com  
 
 **References:**
 - OWASP Foundation - https://owasp.org
@@ -432,5 +432,5 @@ The comprehensive 4-week implementation covers all aspects of modern application
 ---
 
 **Built with ❤️ and 🔒**  
-**SecureShop - Enterprise DevSecOps E-commerce Platform**  
+**SecureFlow - Enterprise DevSecOps E-commerce Platform**  
 **January 2026**

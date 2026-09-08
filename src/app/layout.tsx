@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SecureShop - Enterprise DevSecOps E-commerce Platform",
+  title: "SecureFlow - Enterprise DevSecOps E-commerce Platform",
   description: "A security-first e-commerce platform built with Next.js, PostgreSQL, and comprehensive DevSecOps practices including SAST, SCA, Container Security, IaC Security, and DAST.",
 };
 

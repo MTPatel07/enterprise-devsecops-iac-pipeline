@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide covers deploying SecureShop to production with security best practices.
+This guide covers deploying SecureFlow to production with security best practices.
 
 ## Pre-Deployment Checklist
 
@@ -70,24 +70,24 @@ This guide covers deploying SecureShop to production with security best practice
 4. **Build and Push Container**
    ```bash
    # Build production image
-   docker build -t secureshop:latest .
+   docker build -t secureflow:latest .
    
    # Tag for ECR
    aws ecr get-login-password --region us-east-1 | \
      docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-1.amazonaws.com
    
-   docker tag secureshop:latest <account-id>.dkr.ecr.us-east-1.amazonaws.com/secureshop:latest
+   docker tag secureflow:latest <account-id>.dkr.ecr.us-east-1.amazonaws.com/secureflow:latest
    
    # Push to ECR
-   docker push <account-id>.dkr.ecr.us-east-1.amazonaws.com/secureshop:latest
+   docker push <account-id>.dkr.ecr.us-east-1.amazonaws.com/secureflow:latest
    ```
 
 5. **Deploy to ECS**
    ```bash
    # Update ECS service
    aws ecs update-service \
-     --cluster secureshop-cluster \
-     --service secureshop-service \
+     --cluster secureflow-cluster \
+     --service secureflow-service \
      --force-new-deployment
    ```
 
@@ -167,7 +167,7 @@ SELECT * FROM products LIMIT 5;
 ```bash
 # Using AWS Certificate Manager (ACM)
 aws acm request-certificate \
-  --domain-name secureshop.example.com \
+  --domain-name secureflow.example.com \
   --validation-method DNS
 
 # Configure ALB listener for HTTPS
@@ -190,7 +190,7 @@ aws route53 change-resource-record-sets \
 ```bash
 # CPU utilization alarm
 aws cloudwatch put-metric-alarm \
-  --alarm-name secureshop-high-cpu \
+  --alarm-name secureflow-high-cpu \
   --alarm-description "CPU > 80%" \
   --metric-name CPUUtilization \
   --namespace AWS/ECS \
@@ -211,7 +211,7 @@ aws cloudwatch put-metric-alarm \
 ```bash
 # Create WAF web ACL
 aws wafv2 create-web-acl \
-  --name secureshop-waf \
+  --name secureflow-waf \
   --scope REGIONAL \
   --default-action Block={} \
   --rules file://waf-rules.json
@@ -251,12 +251,12 @@ SENDGRID_API_KEY=SG...
 ```bash
 # Create secret
 aws secretsmanager create-secret \
-  --name secureshop/database \
+  --name secureflow/database \
   --secret-string '{"username":"dbuser","password":"securepass"}'
 
 # Retrieve in application
 aws secretsmanager get-secret-value \
-  --secret-id secureshop/database
+  --secret-id secureflow/database
 ```
 
 **GitHub Secrets (CI/CD):**
@@ -273,13 +273,13 @@ aws secretsmanager get-secret-value \
 
 ```bash
 # List task definitions
-aws ecs list-task-definitions --family-prefix secureshop
+aws ecs list-task-definitions --family-prefix secureflow
 
 # Rollback to previous version
 aws ecs update-service \
-  --cluster secureshop-cluster \
-  --service secureshop-service \
-  --task-definition secureshop:previous-version
+  --cluster secureflow-cluster \
+  --service secureflow-service \
+  --task-definition secureflow:previous-version
 ```
 
 ### Database Rollback
@@ -287,8 +287,8 @@ aws ecs update-service \
 ```bash
 # Restore from backup
 aws rds restore-db-instance-from-db-snapshot \
-  --db-instance-identifier secureshop-restored \
-  --db-snapshot-identifier secureshop-backup-2024-01-15
+  --db-instance-identifier secureflow-restored \
+  --db-snapshot-identifier secureflow-backup-2024-01-15
 ```
 
 ## Monitoring and Alerting
@@ -297,7 +297,7 @@ aws rds restore-db-instance-from-db-snapshot \
 
 ```bash
 # API health check
-curl https://secureshop.com/api/health
+curl https://secureflow.com/api/health
 
 # Database connectivity
 psql $DATABASE_URL -c "SELECT 1"
@@ -310,11 +310,11 @@ docker ps --filter "health=healthy"
 
 ```bash
 # View application logs
-aws logs tail /ecs/secureshop-production --follow
+aws logs tail /ecs/secureflow-production --follow
 
 # Search for errors
 aws logs filter-log-events \
-  --log-group-name /ecs/secureshop-production \
+  --log-group-name /ecs/secureflow-production \
   --filter-pattern "ERROR"
 ```
 
@@ -325,7 +325,7 @@ aws logs filter-log-events \
 aws cloudwatch get-metric-statistics \
   --namespace AWS/ECS \
   --metric-name CPUUtilization \
-  --dimensions Name=ServiceName,Value=secureshop-service \
+  --dimensions Name=ServiceName,Value=secureflow-service \
   --start-time 2024-01-15T00:00:00Z \
   --end-time 2024-01-15T23:59:59Z \
   --period 3600 \
@@ -339,8 +339,8 @@ aws cloudwatch get-metric-statistics \
 ```bash
 # Update desired count
 aws ecs update-service \
-  --cluster secureshop-cluster \
-  --service secureshop-service \
+  --cluster secureflow-cluster \
+  --service secureflow-service \
   --desired-count 5
 ```
 
@@ -362,7 +362,7 @@ resource "aws_appautoscaling_target" "ecs" {
 ```bash
 # Increase RDS instance size
 aws rds modify-db-instance \
-  --db-instance-identifier secureshop-db \
+  --db-instance-identifier secureflow-db \
   --db-instance-class db.t3.large \
   --apply-immediately
 ```
@@ -374,8 +374,8 @@ aws rds modify-db-instance \
 ```bash
 # Manual snapshot
 aws rds create-db-snapshot \
-  --db-instance-identifier secureshop-db \
-  --db-snapshot-identifier secureshop-manual-$(date +%Y%m%d)
+  --db-instance-identifier secureflow-db \
+  --db-snapshot-identifier secureflow-manual-$(date +%Y%m%d)
 
 # Automated backups (configured in Terraform)
 # Retention period: 7 days
@@ -386,7 +386,7 @@ aws rds create-db-snapshot \
 ```bash
 # Export environment configuration
 aws ecs describe-task-definition \
-  --task-definition secureshop:latest > task-definition-backup.json
+  --task-definition secureflow:latest > task-definition-backup.json
 
 # Export Terraform state
 terraform state pull > terraform-state-backup.json
@@ -418,7 +418,7 @@ terraform state pull > terraform-state-backup.json
    terraform apply -var="db_snapshot_id=snap-12345"
    
    # Deploy last known good version
-   aws ecs update-service --task-definition secureshop:stable
+   aws ecs update-service --task-definition secureflow:stable
    ```
 
 4. **Verify Recovery**
@@ -439,13 +439,13 @@ terraform state pull > terraform-state-backup.json
 # 1. Notify users
 # 2. Enable maintenance mode
 # 3. Perform updates
-aws ecs update-service --service secureshop-service --desired-count 0
+aws ecs update-service --service secureflow-service --desired-count 0
 
 # Apply database migrations
 npx drizzle-kit push
 
 # Deploy new version
-aws ecs update-service --service secureshop-service --desired-count 3
+aws ecs update-service --service secureflow-service --desired-count 3
 
 # 4. Verify functionality
 # 5. Disable maintenance mode
@@ -492,7 +492,7 @@ aws ecs update-service --service secureshop-service --desired-count 3
 **Issue: Application won't start**
 ```bash
 # Check logs
-aws logs tail /ecs/secureshop-production --follow
+aws logs tail /ecs/secureflow-production --follow
 
 # Common causes:
 # - Missing environment variables
@@ -525,9 +525,9 @@ aws secretsmanager get-secret-value --secret-id database-creds
 
 ## Support and Resources
 
-- **Documentation:** https://github.com/yourorg/secureshop/wiki
-- **Issue Tracker:** https://github.com/yourorg/secureshop/issues
-- **Security:** security@secureshop.example.com
+- **Documentation:** https://github.com/yourorg/secureflow/wiki
+- **Issue Tracker:** https://github.com/yourorg/secureflow/issues
+- **Security:** security@secureflow.example.com
 - **On-Call:** Use PagerDuty escalation policy
 
 ---

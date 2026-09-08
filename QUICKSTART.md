@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-Get SecureShop running locally in 5 minutes!
+Get SecureFlow running locally in 5 minutes!
 
 ## Prerequisites
 
@@ -11,8 +11,8 @@ Get SecureShop running locally in 5 minutes!
 ## Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/secureshop.git
-cd secureshop
+git clone https://github.com/yourusername/secureflow.git
+cd secureflow
 ```
 
 ## Step 2: Install Dependencies
@@ -28,7 +28,7 @@ npm install
 ```bash
 # Start PostgreSQL container
 docker run -d \
-  --name secureshop-db \
+  --name secureflow-db \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=postgres \
   -e POSTGRES_DB=app_db \
@@ -129,11 +129,11 @@ npm audit fix
 
 ```bash
 # Build image
-docker build -t secureshop:test .
+docker build -t secureflow:test .
 
 # Scan with Trivy
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-  aquasec/trivy image secureshop:test
+  aquasec/trivy image secureflow:test
 ```
 
 ### IaC Scan
@@ -159,7 +159,7 @@ checkov -d terraform/
 docker ps | grep postgres
 
 # Restart database
-docker restart secureshop-db
+docker restart secureflow-db
 ```
 
 ### Port Already in Use
@@ -289,9 +289,9 @@ curl -X POST http://localhost:3000/api/orders \
 
 ## Support
 
-- **Issues:** https://github.com/yourorg/secureshop/issues
-- **Discussions:** https://github.com/yourorg/secureshop/discussions
-- **Security:** security@secureshop.example.com
+- **Issues:** https://github.com/yourorg/secureflow/issues
+- **Discussions:** https://github.com/yourorg/secureflow/discussions
+- **Security:** security@secureflow.example.com
 
 ---
 

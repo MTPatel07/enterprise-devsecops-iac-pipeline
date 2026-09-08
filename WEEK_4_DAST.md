@@ -68,7 +68,7 @@ The **Zed Attack Proxy (ZAP)** is the world's most popular free web application 
 **Example Attack:**
 ```javascript
 // Malicious URL
-https://secureshop.com/search?q=<script>alert('XSS')</script>
+https://secureflow.com/search?q=<script>alert('XSS')</script>
 
 // If not properly escaped, this executes in victim's browser
 ```
@@ -82,7 +82,7 @@ https://secureshop.com/search?q=<script>alert('XSS')</script>
 ```
 Alert: Cross Site Scripting (Reflected)
 Risk: High
-URL: https://secureshop.com/search
+URL: https://secureflow.com/search
 Parameter: q
 Attack: <script>alert(1)</script>
 ```
@@ -116,7 +116,7 @@ SELECT * FROM users WHERE username = '' OR '1'='1' AND password = ''
 ```
 Alert: SQL Injection
 Risk: Critical
-URL: https://secureshop.com/api/products?id=1
+URL: https://secureflow.com/api/products?id=1
 Parameter: id
 Attack: 1' OR '1'='1
 ```
