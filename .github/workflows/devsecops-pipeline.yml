@@ -315,7 +315,7 @@ jobs:
           sleep 10
           curl -f http://localhost:3000/api/health || exit 1
         env:
-          DATABASE_URL: postgresql://${{ secrets.CI_DB_USER || 'postgres' }}:${{ secrets.CI_DB_PASSWORD || 'ci_test_only' }}@localhost:5432/${{ secrets.CI_DB_NAME || 'app_db' }}
+          DATABASE_URL: postgresql://postgres:ci_test_only@localhost:5432/app_db
           PORT: 3000
 
       - name: OWASP ZAP Baseline Scan
