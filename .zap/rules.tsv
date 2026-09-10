@@ -1,21 +1,47 @@
-# ZAP Scanning Rules Configuration
-# Format: rule_id  action  comment
-# Actions: IGNORE, INFO, WARN, FAIL
+# ZAP Security Testing Rules
+# This file configures which alerts OWASP ZAP should raise during scanning
 
-# Ignore false positives for development
-10096	IGNORE	Timestamp Disclosure
-10109	IGNORE	Modern Web Application
-10049	INFO	Storable and Cacheable Content
-10015	INFO	Incomplete or No Cache-control Header Set
-10038	INFO	Content Security Policy (CSP) Header Not Set
-
-# Security Headers (WARN in dev, FAIL in production)
-10020	WARN	X-Frame-Options Header Not Set
-10021	WARN	X-Content-Type-Options Header Missing
-10023	WARN	Information Disclosure - Debug Error Messages
-
-# Critical vulnerabilities (FAIL)
-40012	FAIL	Cross Site Scripting (Reflected)
-40014	FAIL	Cross Site Scripting (Persistent)
-40018	FAIL	SQL Injection
-90019	FAIL	Server Side Code Injection
+# Alert codes to explicitly fail the scan
+# Format: rule_id	alert_name
+10000	Certificate Transparency Logs
+10001	Private IP Disclosure
+10010	Cookie No HttpOnly Flag
+10011	Cookie No Secure Flag
+10012	Password Autocomplete
+10015	Incomplete or No Cache-control Header Set
+10016	Missing Content Security Policy Header
+10017	Missing X-Content-Type-Options Header
+10018	Missing X-Frame-Options Header
+10019	Missing X-XSS-Protection Header
+10020	Missing Anti CSRF Tokens
+10021	HTTP Only Site
+10025	Information Disclosure - Sensitive Information in URL
+10026	HTTP Parameter Pollution
+10027	Information Disclosure - Suspicious Comments
+10029	Statsmodels Cross Site Scripting
+10030	Open Redirect
+10031	Application Error Disclosure
+10032	Viewstate Decryption
+10033	Directory Browsing
+10034	Heartbleed OpenSSL Vulnerability
+10035	Strict Transport Security Missing From HTTPS Response
+10036	HTTP Response Splitting
+10037	Server Leaks Version Information Via 'Server' HTTP Response Header Field
+10038	Content Security Policy Report URI Not Set
+10040	Web Browser XSS Protection Not Enabled
+10041	X-Content-Type-Options Header Missing
+10042	Reverse Tabnabbing
+10043	Source Code Disclosure - SQL
+10047	HTTPS Content Available via HTTP
+10049	Storable but Cacheable Content
+10050	Retrieved from Cache
+10051	Relative Path Traversal
+10052	X-Content-Type-Options Header Missing
+10053	X-Frame-Options Bypass
+10054	Cookie without SameSite Attribute
+10055	CSP Directive Missing or Malformed
+10056	X-Debug-Token Information Leak
+10057	Timestamp Disclosure - Unix
+10094	Base64 Disclosure
+10095	Backup File Disclosure
+10096	Skip Heading to Content
