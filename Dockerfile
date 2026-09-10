@@ -27,6 +27,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 
 # Build application
 RUN npm run build
+RUN mkdir -p /app/public
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -40,8 +41,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files
-# Only copy public if it exists
-COPY --from=builder /app/public ./public || true
+COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
