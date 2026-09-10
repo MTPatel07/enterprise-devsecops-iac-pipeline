@@ -138,6 +138,8 @@ jobs:
           tags: ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            DATABASE_URL=postgresql://postgres:ci_test_only@localhost:5432/app_db
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
