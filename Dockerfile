@@ -23,7 +23,7 @@ ARG DATABASE_URL=postgresql://postgres:ci_test_only@localhost:5432/app_db
 # Environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-ENV DATABASE_URL=${DATABASE_URL} 
+ENV DATABASE_URL=postgresql://postgres:ci_test_only@localhost:5432/app_db
 
 # Build application
 RUN npm run build
